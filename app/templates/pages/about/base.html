@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% set active_page = "about" %}
+
+{% set subnav_bar = [
+    ('/about', 'mission', 'Mission'),
+    ('/about/process', 'process', 'Process'),
+    ('/about/curriculum', 'curriculum', 'Curriculum'),
+    ('/about/partners', 'partners', 'Partners'),
+    ('/about/team', 'team', 'Team'),
+] -%}
+{% set active_subpage = active_subpage|default('mission') -%}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+
+<div class="clearfix">&nbsp;</div>
+<div class="list-group">
+
+{% for href, id, caption in subnav_bar %}
+<a href="{{ href|e }}" class="list-group-item{% if id == active_subpage %} active{% endif %}">{{ caption|e }}</a>
+
+
+{% endfor %}
+
+</div>
+</div>
+
+<div class="col-md-9">
+
+{% block about_content %}
+
+{% endblock about_content %}
+</div>
+
+</div><!--row-->
+</div><!--container-->
+
+
+{% endblock content %}

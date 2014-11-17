@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% set active_page = "help" %}
+
+{% block content %}
+
+ <!-- Jumbotron -->
+            <div class="jumbotron">
+                <h1>You can help us.</h1>
+                <p class="lead">
+               We can use you, no matter your commitment level.</p>
+            </div>
+
+                <div class="col-lg-4">
+                    <h2>Teach Classes</h2>
+                    <p>
+We go to MBA once a week to teach, every Monday from 9:00 - 10:30 am.
+The school is about a 15 minute walk from Old Campus. If you want to
+join us, contact us and we'll meet up with you before walking there.
+</p>
+
+                    <p><br><a class="btn btn-primary" href="/contact" role="button">Contact Us &raquo;</a></p>
+                </div>
+                <div class="col-lg-4">
+
+<h2>Answer Questions</h2>
+<p>
+Help students on your own time, in our online Piazza classroom.
+Students post programming questions, and we answer them with code examples,
+resources, and guidance. If you want an account on Piazza, please contact
+us via your @yale.edu email.
+<br>
+</p>
+
+                    <p><a class="btn btn-primary" href="/contact" role="button">Contact Us &raquo;</a></p>
+                </div>
+
+                                <div class="col-lg-4">
+                    <h2>Write Tutorials</h2>
+<p>
+We write programming tutorials for the students, which you can find in our
+<a href="/tutorials">tutorials</a> section. You can write a tutorial, or
+any edit of ours, by submitting a pull request.
+</p>
+
+                    <p><br><br><a class="btn btn-primary" href="http://www.github.com/codenewhaven/tutorials" role="button">Our Tutorials on GitHub &raquo;</a></p>
+                </div>
+            </div>
+
+
+
+            <!-- Jumbotron -->
+            <div class="jumbotron">
+                <h1>Get in touch with us.</h1>
+                <p class="lead">
+               Please email any of us with any questions, comments, or suggestions.</p>
+               <p><a class="btn btn-lg btn-success" href="#" role="button">Contact Us</a></p>
+            </div>
+{% endblock content %}

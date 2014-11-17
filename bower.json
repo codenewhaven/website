@@ -1,0 +1,21 @@
+{
+  "name": "cnhweb",
+  "version": "0.0.0",
+  "description": "Code New Haven website",
+  "main": "?",
+  "authors": [
+    "Miles Richardson",
+    "Will Childs-Klein",
+    "Lexi Signoriello"
+  ],
+  "license": "MIT",
+  "homepage": "www.codenewhaven.org",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

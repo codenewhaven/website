@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <h1>Help us teach!</h1>
+    <p class="lead">
+    Code New Haven wants more teachers. </p>
+    <p><a class="btn btn-lg btn-success" href="/help" role="button">Learn More</a></p>
+</div>
+
+<!-- Row of columns -->
+<div class="row">
+
+<!-- Column -->
+<div class="col-lg-4">
+<h2>Volunteer With Us</h2>
+<p>
+We are teaching a group of sixteen students at Metro Business Academy
+how to code. Once a week, we go into class at MBA and show them how
+to do cool things with a text editor. We move at a fast, efficient pace.
+On the fourth day of class, all
+sixteen students successfully displayed a rotating, 3-dimensional, colored
+cube in the center of their web browser.
+</p>
+<p>
+Our student:teacher ratio is 4:1. Help us improve it!
+</p>
+<p><a class="btn btn-primary" href="/help" role="button">Learn More &raquo;</a></p>
+</div>
+<!-- END Column -->
+
+<!-- Column -->
+<div class="col-lg-4">
+<h2>Teach Practical Skills</h2>
+<p>
+We have a limited amount of time to teach the students, so we emphasize
+efficient teaching. We know that our curriculum alone cannot teach them how to
+code. Therefore, we spend our time in class keeping them motivated
+to learn on their own, and confident they can. We write tutorials for students every
+week, and maintain a Piazza classroom for them to ask questions.
+</p>
+<p>
+One student started learning Python without any help!
+</p>
+<p><a class="btn btn-primary" href="/help" role="button">Learn More &raquo;</a></p>
+</div>
+<!-- End Column -->
+
+<!-- Column -->
+<div class="col-lg-4">
+<h2>Improve Yourself</h2>
+<p>
+If you can't teach it, you don't know it... but if you don't know it, the best
+way to learn it is to teach it! No matter what your skill level, you will
+benefit from teaching your knowledge and giving back to the community.
+You will solidify your programming knowledge by writing tutorials,
+teaching class, and answering questions. This is a great opportunity
+to learn more about yourself.
+<br>
+</p>
+
+<p>
+Help yourself help us help them!
+</p>
+<p><a class="btn btn-primary" href="/help" role="button">Learn More &raquo;</a></p>
+</div>
+<!-- END column -->
+
+</div>
+<!-- END ROW -->
+
+{% endblock content %}
