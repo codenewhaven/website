@@ -1,18 +1,18 @@
 import os
 import markdown
 
+
 class Tutorial:
 
     def __init__(self, path_to_tutorial):
 
         directory = None
-        slug      = None
-        tags      = []
-        demos     = []
-        title     = None
-        category  = None
-        markdown  = None
-        html      = None
+        slug = None
+        tags = []
+        title = None
+        category = None
+        markdown = None
+        html = None
 
         self.parse(path_to_tutorial)
 
@@ -26,7 +26,6 @@ class Tutorial:
 
         self.parse_metadata()
         self.parse_tutorial()
-        self.parse_demos()
 
     def parse_metadata(self):
         metadata_path = os.path.join(self.directory, self.slug + '.metadata')
@@ -39,16 +38,7 @@ class Tutorial:
         for line in metadata_lines:
             key, sep, val = line.partition('=')
 
-            # TODO put this into a dictionary
-
-            key = key.lower()
-
-            if key == 'tags':
-                self.tags = val.split()
-            elif key == 'category':
-                self.category = val
-            elif key == 'title':
-                self.title = val
+            self.set_metadata(key, val)
 
     def parse_tutorial(self):
         tutorial_path = os.path.join(self.directory, self.slug + '.md')
@@ -59,15 +49,26 @@ class Tutorial:
             self.markdown = fh.read()
             self.html = markdown.markdown(self.markdown)
 
-    def parse_demos(self):
-        pass
+    def set_metadata(self, key, val):
 
-path = 'tutorials/javascript'
-tut = Tutorial(path)
+        key = key.lower()
 
-print 'Tutorial parsed.'
-print 'Tags: ',
-print tut.tags
+        if key == 'tags':
+            self.tags = val.split()
+        elif key == 'category':
+            self.category = val
+        elif key == 'title':
+            self.title = val
 
-print 'Category: ' + tut.category
-print 'Title: ' + tut.title
+
+def all_tutorials(tutorials_path):
+    if not os.path.exists(tutorials_path):
+        raise KeyError('Could not find tutorials_path %s' % tutorials_path)
+
+    tutorials = []
+    for fn in os.listdir(tutorials_path):
+        fullpath = os.path.join(tutorials_path, fn)
+        if os.path.isdir(fullpath):
+            tutorials.append(Tutorial(fullpath))
+
+    return tutorials

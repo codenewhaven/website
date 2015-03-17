@@ -11,12 +11,6 @@ website = Blueprint('website',
 def home():
     return render_template('pages/home.html')
 
-
-@website.route('/tutorials')
-def tutorials():
-    return render_template('pages/tutorials.html')
-
-
 @website.route('/help')
 def help():
     return render_template('pages/help.html')
