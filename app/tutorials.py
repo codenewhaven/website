@@ -18,7 +18,6 @@ def register_tutorials():
 
 tutorials.before_request(register_tutorials)
 
-
 def find_tutorial(tutslug):
     for tut in g.all_tuts:
         if tut.slug == tutslug:
@@ -34,7 +33,7 @@ def tutorials_home():
 @tutorials.route('/<tutslug>')
 def tutorial(tutslug):
     try:
-        return render_template("pages/tutorial.html",
+        return render_template("tutorials/tutorial.html",
                                tutorial=find_tutorial(tutslug))
     except TemplateNotFound:
         abort(404)
@@ -50,7 +49,7 @@ def tutorial_file(tutslug, subdir, file_id):
         file = tutorial.find_file_by_id(subdir, file_id)
 
 
-        return render_template("pages/tutorial_file.html",
+        return render_template("tutorials/tutorial_file.html",
                                tutslug=tutslug, file=file)
     except TemplateNotFound:
         abort(404)

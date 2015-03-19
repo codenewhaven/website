@@ -7,26 +7,17 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bower_components/easy-tree/css/easyTree.css') }}">
 <style type="text/css">
 .easy-tree {
-    width: 300px;
+    background-color: #428bca;
+    border: 1px solid #ddd;
 }
-/*
-.easy-tree-toolbar {
-    display: none;
-}*/
 </style>
-
 {% endblock extra_head %}
 
-{% block content %}
 
-tutorial
-<br>
-slug: {{tutorial.slug}}
-dir: {{tutorial.directory}}
-subdirs: {{tutorial.subdirs}}
-
-
-{% macro subdir_tree(subdir) -%}
+{% macro subdir_tree(tutorial, subdir) -%}
+<div class="panel panel-default">
+  <div class="panel-heading"><b>{{subdir}}</b> - View Files</div>
+  <div class="panel-body">
 <div class="easy-tree">
 <ul>
 {%- for item in tutorial.subdir_info[subdir]['tree'].children recursive %}
@@ -40,21 +31,39 @@ subdirs: {{tutorial.subdirs}}
 {%- endfor %}
 </ul>
 </div>
+  </div>
+</div>
+
 {%- endmacro %}
 
 
-<p>demo subdir:</p>
+{% block content %}
 
-{{subdir_tree('demo')}}
+<div class="container">
+<div class="row">
+<div class="col-md-3">
 
+<div class="clearfix">&nbsp;</div>
 
-<br>
-{{tutorial.subdir_info['demo']}}
+{% block sidebar %}
+{% endblock sidebar %}
 
+</div>
 
+<div class="col-md-9">
 
+<div class="clearfix">&nbsp;</div>
+
+{% block tutorial_content %}
+{% endblock tutorial_content %}
+
+</div>
+
+</div><!--row-->
+</div><!--container-->
 
 {% endblock content %}
+
 
 {% block extra_footer %}
 <script>
@@ -71,4 +80,4 @@ $(document).ready(function(){
     });
 });
 </script>
-{% endblock extra_footer%}
+{% endblock extra_footer %}

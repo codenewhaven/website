@@ -1,0 +1,32 @@
+{% extends "tutorials/tutorial_base.html" %}
+
+
+{% block sidebar %}
+
+{% for subdir in tutorial.subdirs %}
+
+{{subdir_tree(tutorial, subdir)}}
+
+{% endfor %}
+
+{% endblock sidebar %}
+
+{% block tutorial_content %}
+
+tutorial
+<br>
+slug: {{tutorial.slug}}
+<br>
+dir: {{tutorial.directory}}
+<br>
+subdirs: {{tutorial.subdirs}}
+
+
+
+
+
+
+
+
+{% endblock tutorial_content %}
+
