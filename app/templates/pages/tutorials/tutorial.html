@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set active_page = "tutorials" %}
+
+{% block extra_head %}
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="{{ url_for('static', filename='vendor/bower_components/easy-tree/src/easyTree.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='vendor/bower_components/easy-tree/css/easyTree.css') }}">
+<style type="text/css">
+.easy-tree {
+    width: 300px;
+}
+/*
+.easy-tree-toolbar {
+    display: none;
+}*/
+</style>
+
+{% endblock extra_head %}
+
+{% block content %}
+
+tutorial
+<br>
+slug: {{tutorial.slug}}
+dir: {{tutorial.directory}}
+subdirs: {{tutorial.subdirs}}
+
+
+{% macro subdir_tree(subdir) -%}
+<div class="easy-tree">
+<ul>
+{%- for item in tutorial.subdir_info[subdir]['tree'].children recursive %}
+    <li>
+    {%- if item.children -%}
+        <span class="blue">{{ item.name }}</span>
+        <ul>{{ loop(item.children) }}</ul>
+    {% else %}
+        <span class="blah">{{item.name}}|view/{{subdir}}/{{item.file_id}}</span>
+    {%- endif %}</li>
+{%- endfor %}
+</ul>
+</div>
+{%- endmacro %}
+
+
+<p>demo subdir:</p>
+
+{{subdir_tree('demo')}}
+
+
+<br>
+{{tutorial.subdir_info['demo']}}
+
+
+
+
+{% endblock content %}
+
+{% block extra_footer %}
+<script>
+$(document).ready(function(){
+    $('.easy-tree').EasyTree({
+                selectable: true,
+                addable: false,
+                editable: false,
+                deletable: false
+            });
+
+    $('.easy-tree').find('li > span > a').click(function (e) {
+        console.log($.trim(e.target.innerHTML));
+    });
+});
+</script>
+{% endblock extra_footer%}

@@ -1,0 +1,14 @@
+{
+  "name": "easy-tree",
+  "homepage": "https://github.com/zgs225/easy-tree",
+  "_release": "3768de706a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3768de706ab39bf473b117cc02deb9ca5723da7c"
+  },
+  "_source": "https://github.com/zgs225/easy-tree.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/zgs225/easy-tree.git",
+  "_direct": true
+}

@@ -1,7 +1,7 @@
 import os
 from flask import Flask, g
 from app.website import website
-from app.tutorials import tutorials
+from app.tutorials import tutorials as tutorials_blueprint
 from app import errors
 
 from tutorials import Tutorial, all_tutorials
@@ -19,7 +19,7 @@ app.register_blueprint(website, static_folder='../static/')
 
 # Tutorials section of website
 app.register_blueprint(
-    tutorials, url_prefix='/tutorials', static_folder='../static/')
+    tutorials_blueprint, url_prefix='/tutorials', static_folder='../static/')
 
 # Http error views (404, 503, etc.)
 errors.init_errors(app)
