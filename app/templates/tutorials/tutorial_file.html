@@ -2,13 +2,18 @@
 
 
 
-{% block content %}
+
+{% block tutorial_breadcrumbs %}
+<li><a href="/tutorials/{{tutorial.slug}}">{{tutorial.title}}</a></li>
+<li class="active">{{filename|replace(tutorial.directory + '/', '')}}</li>
+{% endblock tutorial_breadcrumbs %}
 
 
-tutorial file
-<br>
-tutslug: {{tutslug}}
-file: {{file}}
+{% block tutorial_content %}
 
 
-{% endblock content %}
+{{highlighted_html|safe}}
+
+
+
+{% endblock tutorial_content %}

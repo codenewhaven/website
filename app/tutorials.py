@@ -46,10 +46,13 @@ def tutorial(tutslug):
 def tutorial_file(tutslug, subdir, file_id):
     try:
         tutorial = find_tutorial(tutslug)
-        file = tutorial.find_file_by_id(subdir, file_id)
-
+        filename = tutorial.find_file_by_id(subdir, file_id)
+        html = tutorial.get_file_html(subdir, file_id)
 
         return render_template("tutorials/tutorial_file.html",
-                               tutslug=tutslug, file=file)
+                               tutorial=tutorial,
+                               subdir=subdir,
+                               filename=filename,
+                               highlighted_html=html)
     except TemplateNotFound:
         abort(404)

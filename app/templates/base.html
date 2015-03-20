@@ -44,11 +44,7 @@
                     <li{% if id == active_page %} class="active" {% endif %}>
                         <a href="{{ href|e }}">{{ caption|e }}</a></li>
                 {% endfor %}
-                    <!-- <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/tutorials">Tutorials</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                    <li style="green"><a href="/help">Help Us!</a></li> -->
+
                 </ul>
             </div>
             {% block content %}

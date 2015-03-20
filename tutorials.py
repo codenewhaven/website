@@ -1,13 +1,10 @@
 import os
 import markdown
 import md5
-import collections
-
-# def flatten(x):
-#     if isinstance(x, collections.Iterable):
-#         return [a for i in x for a in flatten(i)]
-#     else:
-#         return [x]
+import gfm
+from pygments import highlight
+from pygments.lexers import get_lexer_for_filename
+from pygments.formatters import HtmlFormatter
 
 class Tutorial:
 
@@ -57,7 +54,8 @@ class Tutorial:
 
         with open(tutorial_path, mode='r') as fh:
             self.markdown = fh.read()
-            self.html = markdown.markdown(self.markdown)
+            self.html = markdown.markdown(self.markdown, extensions=['markdown.extensions.codehilite',
+                                          'markdown.extensions.toc'])
 
     def parse_subdirs(self):
         for fn in os.listdir(self.directory):
@@ -70,21 +68,23 @@ class Tutorial:
 
         def make_tree(path):
             name = os.path.basename(path)
-            fullpath = os.path.join(path,name)
-            tree = dict(name=name, fullpath=fullpath, file_id=md5.md5(fullpath).hexdigest(),children=[], dir_children=[], file_children=[])
-            try: lst = os.listdir(path)
+            fullpath = os.path.join(path, name)
+            file_id = md5.md5(fullpath).hexdigest()
+            tree = dict(name=name, fullpath=fullpath, file_id=file_id,
+                        children=[], dir_children=[], file_children=[])
+            try:
+                lst = os.listdir(path)
             except OSError:
-                pass #ignore errors
+                pass  # ignore errors
             else:
                 for name in lst:
                     fn = os.path.join(path, name)
                     if os.path.isdir(fn):
                         tree['dir_children'].append(make_tree(fn))
                     else:
-                        fullpath = os.path.join(path,name)
                         tree['file_children'].append(dict(name=name,
-                                                     fullpath=fullpath,
-                                                     file_id=md5.md5(fullpath).hexdigest()))
+                                                          fullpath=fn,
+                                                          file_id=md5.md5(fn).hexdigest()))
 
             tree['children'] = tree['dir_children'] + tree['file_children']
             return tree
@@ -101,38 +101,28 @@ class Tutorial:
         except KeyError:
             print 'Cannot find tree for subdir %s' % subdir
 
-
         def find_recurse(children):
             for child in children:
                 if child['file_id'] == file_id:
                     return child['fullpath']
                 elif 'children' in child.keys() and len(child['children']) > 0:
-                    find_recurse(child['children'])
+                    match = find_recurse(child['children'])
+                    if match:
+                        return match
+            return None
 
-
-        print 'children'
         return find_recurse(tree['children'])
-        # from pprint import pprint
-        # pprint(tree['children'])
 
-        # return find_recurse(tree['children'])
+    def get_file_html(self, subdir, file_id):
+        fullpath = self.find_file_by_id(subdir, file_id)
+        name = os.path.basename(fullpath)
+        lexer = get_lexer_for_filename(name)
 
+        with open(fullpath, mode='r') as fh:
+            source = fh.read()
+            html = highlight(source, lexer, HtmlFormatter())
 
-        # def find_recurse(children):
-
-        #     print 'CHILDREN'
-        #     from pprint import pprint
-        #     pprint(children)
-
-        #     for child in children:
-        #         if child['file_id'] == file_id:
-        #             return child.fullpath
-        #         if 'children' in child.keys():
-        #             return find_recurse(child['fullpath'])
-        #         else:
-        #             return 'foundnone'
-
-        # return find_recurse(tree['children'])
+        return html
 
     def set_metadata(self, key, val):
 
