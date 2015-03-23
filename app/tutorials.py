@@ -26,7 +26,8 @@ def find_tutorial(tutslug):
 
 @tutorials.route('/')
 def tutorials_home():
-    return render_template('pages/tutorials.html')
+    return render_template('pages/tutorials.html',
+                           tutorials=g.all_tuts)
 
 
 @tutorials.route('/<tutslug>/')

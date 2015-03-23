@@ -1,5 +1,8 @@
 # Metadata of javascript file
 
-title=Javascript Tutorial
-category=programming
-tags=tag1 tag2
+title=Javascript Crash Course: 3D Cubes in Browser
+category=javascript
+tags=javascript cubes threesjs
+description=This tutorial is a crash course to javascript. We show
+you the power of javascript by rendering 3 dimensional cubes on your
+screen, with just a few lines of code.

@@ -1,0 +1,6 @@
+title=Javascipt Crash Course: Click Events and jQuery
+category=javascript
+tags=javascript jquery
+description=This is a short tutorial showing you how to use jQuery,
+a popular javascript library, to respond to "click events" in your
+code. That is, how to make your site interactive.

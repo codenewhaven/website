@@ -14,6 +14,7 @@ class Tutorial:
         self.slug = None
         self.tags = []
         self.title = None
+        self.description = ""
         self.category = None
         self.markdown = None
         self.html = None
@@ -42,10 +43,20 @@ class Tutorial:
         with open(metadata_path, mode='r') as fh:
             metadata_lines = fh.readlines()
 
+        parsing_description = False
         for line in metadata_lines:
             key, sep, val = line.partition('=')
-
             self.set_metadata(key, val)
+
+            # Account for multi-line descriptions
+            if key == 'description':
+                parsing_description = True
+            elif sep == '=':
+                parsing_description = False
+
+            if parsing_description and not sep:
+                self.description += key.strip() + " "
+
 
     def parse_tutorial(self):
         tutorial_path = os.path.join(self.directory, self.slug + '.md')
@@ -134,7 +145,8 @@ class Tutorial:
             self.category = val
         elif key == 'title':
             self.title = val
-
+        elif key == 'description':
+            self.description += val.strip() + " "
 
 def all_tutorials(tutorials_path):
     if not os.path.exists(tutorials_path):

@@ -1,8 +1,97 @@
 {% extends "base.html" %}
 {% set active_page = "tutorials" %}
 
-{% block content %}
+{% block extra_head %}
+{{super()}}
+<style>
+.tutorial-card {
+    cursor: pointer;
+}
+.tutorial-card:hover {
+    background-color: #ebebeb;
+}
 
-all tutorials
+</style>
+{% endblock extra_head %}
+
+{% block breadcrumb_main %}
+{% endblock breadcrumb_main %}
+
+
+{% block content %}
+<div class="row">
+<div class="clearfix">&nbsp;</div>
+ {%- for tutorial in tutorials %}
+    <div class="col-sm-4">
+        <div class="panel panel-default tutorial-card"
+        title="{{tutorial.slug}}">
+            <div class="panel-heading">
+                <a href="{{tutorial.slug}}">
+                    <b>{{tutorial.title}}</b>
+                </a>
+            </div>
+            <div class="panel-body">
+
+                <span class="pull-left small">
+                    <strong>Description</strong>
+                </span>
+
+                <br>
+
+                <p class="text-justify">
+                    {{tutorial.description or "No description."}}
+                </p>
+
+                <span class="pull-left small">
+                    <strong>Tags</strong>
+                </span>
+
+                <span class="pull-right small">
+                    <strong>Category</strong>
+                </span>
+
+                <br>
+
+                <span class="pull-left small">
+                    {{tutorial.tags|join(', ')}}
+                </span>
+                <span class="pull-right small">
+                    {{tutorial.category}}
+                </span>
+            </div>
+        </div>
+    </div>
+{%- endfor %}
+
+<div class="col-sm-4">
+    <div class="panel panel-info">
+    <div class="panel-heading">
+        <b>YOUR TUTORIAL HERE?</b>
+    </div>
+    <div class="panel-body text-justify">
+        You can write tutorials. It's really easy, and all in markdown.
+        Even if you don't live in New Haven, this is a great way to
+        help.
+        <br>
+        <br>
+        <a href="/help">See how you can help.</a>
+    </div>
+</div>
+
+</div>
 
 {% endblock content %}
+
+
+{% block extra_footer %}
+{{super()}}
+<script>
+$(document).ready(function(){
+     $('.tutorial-card').click(function(e) {
+        e.preventDefault();
+        window.location = $(e.currentTarget).attr('title');
+    });
+});
+</script>
+
+{% endblock extra_footer %}
